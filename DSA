@@ -1,0 +1,1210 @@
+Understanding Java Arrays
+Key Characteristics
+●	Fixed Length: Once you create an array, you cannot change its size. If you need more room, you have to create a new, larger array.
+●	Zero-Indexed: The first element is at index 0, and the last is at length - 1.
+●	Type Safety: An int[] can only hold integers; it won't let a String sneak in.
+Declaration and Initialization
+You can declare an array in two ways:
+1.	Declaration with size: int[] numbers = new int[5]; (Initializes with default values, like 0).
+2.	Literal initialization: int[] numbers = {10, 20, 30, 40};.
+________________________________________
+2. Common Manipulations
+To work with arrays effectively, you'll perform these core operations:
+●	Accessing/Modifying: Using the index (e.g., arr[2] = 50;).
+●	Traversing: Using a for loop or an enhanced for-each loop to visit every element.
+●	Sorting: Arranging elements in ascending order.
+●	Searching: Finding the index of a specific value (Linear or Binary search).
+●	Copying: Creating a duplicate or a subset of an array.
+________________________________________
+3. The java.util.Arrays Utility Class
+Java provides a powerhouse class called Arrays that handles the heavy lifting for you. Without it, you'd be writing manual loops for everything.
+Method	Description
+Arrays.sort(arr)	Sorts the array in ascending order.
+Arrays.binarySearch(arr, key)	Finds the index of a value (requires a sorted array).
+Arrays.copyOf(arr, newLength)	Clones the array with a new size.
+Arrays.equals(arr1, arr2)	Checks if two arrays have the same elements in the same order.
+Arrays.toString(arr)	Converts the array to a readable string format.
+Arrays.fill(arr, value)	Fills the entire array with a specific value.
+________________________________________
+4. Comprehensive Java Code Example
+Here is a single program demonstrating all the major manipulations and Arrays methods.
+Java
+import java.util.Arrays;
+
+public class ArrayMastery {
+    public static void main(String[] args) {
+        // 1. Initialization
+        int[] myNumbers = {5, 2, 9, 1, 6};
+
+        // 2. Accessing and Modifying
+        System.out.println("Original first element: " + myNumbers[0]);
+        myNumbers[0] = 10; 
+        
+        // 3. Printing an array (The easy way)
+        System.out.println("Current Array: " + Arrays.toString(myNumbers));
+
+        // 4. Sorting
+        Arrays.sort(myNumbers);
+        System.out.println("Sorted Array: " + Arrays.toString(myNumbers));
+
+        // 5. Binary Search (Must be sorted first!)
+        int index = Arrays.binarySearch(myNumbers, 6);
+        System.out.println("Index of element 6: " + index);
+
+        // 6. Copying / Resizing
+        int[] largerArray = Arrays.copyOf(myNumbers, 10);
+        System.out.println("New expanded array: " + Arrays.toString(largerArray));
+
+        // 7. Filling
+        int[] blankArray = new int[5];
+        Arrays.fill(blankArray, 7);
+        System.out.println("Filled Array: " + Arrays.toString(blankArray));
+
+        // 8. Manual Traversal (Looping)
+        System.out.print("Manual print: ");
+        for (int num : myNumbers) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // 9. Comparison
+        int[] checkArray = {1, 2, 5, 6, 9}; // Matches myNumbers after sort
+        boolean isEqual = Arrays.equals(myNumbers, checkArray);
+        System.out.println("Are the arrays equal? " + isEqual);
+    }
+}
+________________________________________
+Would you like me to explain how to handle 2D arrays (matrices) or perhaps dive into how ArrayList differs from these standard arrays?
+
+
+
+
+Here’s a comprehensive guide to Java Strings — covering their fundamentals, manipulations, and the full set of methods available. I’ll also provide a consolidated code example that demonstrates most of these methods in action.
+________________________________________
+🔹 Fundamentals of Java Strings
+●	Definition: A String in Java is an object that represents a sequence of characters.
+●	Immutability: Strings are immutable — once created, their value cannot be changed. Any modification creates a new String object.
+●	Storage: Internally, Strings are backed by a char[] array.
+●	Creation: 
+●	String s1 = "Hello";              // String literal
+●	String s2 = new String("Hello");  // Using constructor
+________________________________________
+🔹 Common String Manipulations
+●	Concatenation: + operator or concat()
+●	Comparison: equals(), equalsIgnoreCase(), compareTo()
+●	Searching: indexOf(), lastIndexOf(), contains()
+●	Substrings: substring(start, end)
+●	Case Conversion: toUpperCase(), toLowerCase()
+●	Trimming: trim()
+●	Replacement: replace(), replaceAll()
+●	Splitting: split(regex)
+●	Joining: String.join(delimiter, elements)
+●	Checking Empty/Blank: isEmpty(), isBlank()
+________________________________________
+🔹 Complete List of String Methods
+Here’s a structured table of the most important methods (from Java SE 8–17):
+Category	Methods
+Length & Info	length(), isEmpty(), isBlank()
+Character Access	charAt(), codePointAt(), codePointBefore(), codePointCount()
+Comparison	equals(), equalsIgnoreCase(), compareTo(), compareToIgnoreCase()
+Searching	indexOf(), lastIndexOf(), contains(), startsWith(), endsWith()
+Substrings	substring(), subSequence()
+Modification	concat(), replace(), replaceAll(), replaceFirst()
+Case Conversion	toUpperCase(), toLowerCase()
+Trimming	trim(), strip(), stripLeading(), stripTrailing()
+Splitting/Joining	split(), join()
+Conversion	toCharArray(), getBytes(), valueOf()
+Interning	intern()
+Formatting	format()
+Other Utilities	matches(), regionMatches(), contentEquals(), copyValueOf()
+(Methods vary slightly depending on Java version; newer ones like isBlank() and strip() are Java 11+.)
+________________________________________
+🔹 Code Demonstration (All-in-One Example)
+public class StringDemo {
+    public static void main(String[] args) {
+        String str = "  Hello, World!  ";
+        
+        // Length & Info
+        System.out.println("Length: " + str.length());
+        System.out.println("Is Empty: " + str.isEmpty());
+        System.out.println("Is Blank: " + str.isBlank());
+
+        // Character Access
+        System.out.println("Char at 1: " + str.charAt(1));
+        System.out.println("CodePoint at 1: " + str.codePointAt(1));
+
+        // Comparison
+        System.out.println("Equals 'Hello': " + str.equals("Hello"));
+        System.out.println("EqualsIgnoreCase 'hello, world!': " + str.equalsIgnoreCase("hello, world!"));
+
+        // Searching
+        System.out.println("Index of 'World': " + str.indexOf("World"));
+        System.out.println("Contains 'Hello': " + str.contains("Hello"));
+        System.out.println("StartsWith '  He': " + str.startsWith("  He"));
+        System.out.println("EndsWith '!  ': " + str.endsWith("!  "));
+
+        // Substrings
+        System.out.println("Substring(2, 7): " + str.substring(2, 7));
+
+        // Modification
+        System.out.println("Concat: " + str.concat(" Java"));
+        System.out.println("Replace 'World' with 'Java': " + str.replace("World", "Java"));
+        System.out.println("ReplaceAll vowels: " + str.replaceAll("[AEIOUaeiou]", "*"));
+
+        // Case Conversion
+        System.out.println("Uppercase: " + str.toUpperCase());
+        System.out.println("Lowercase: " + str.toLowerCase());
+
+        // Trimming
+        System.out.println("Trim: '" + str.trim() + "'");
+        System.out.println("Strip: '" + str.strip() + "'");
+
+        // Splitting & Joining
+        String[] parts = str.trim().split(", ");
+        for (String p : parts) System.out.println("Split part: " + p);
+        System.out.println("Join: " + String.join(" - ", parts));
+
+        // Conversion
+        char[] chars = str.toCharArray();
+        System.out.println("Char Array length: " + chars.length);
+        byte[] bytes = str.getBytes();
+        System.out.println("Bytes length: " + bytes.length);
+
+        // Interning
+        String s1 = new String("Java").intern();
+        String s2 = "Java";
+        System.out.println("Intern equals: " + (s1 == s2));
+
+        // Formatting
+        String formatted = String.format("Pi approx: %.2f", Math.PI);
+        System.out.println(formatted);
+
+        // Other Utilities
+        System.out.println("Matches regex: " + str.matches(".*World.*"));
+        System.out.println("RegionMatches: " + str.regionMatches(2, "Hello", 0, 3));
+    }
+}
+________________________________________
+✅ This code demonstrates nearly every major String method in Java.
+Would you like me to organize these methods into a Word-document style study guide (like you’ve been building for collections), so you can add it to your library?
+StringBuilder vs. StringBuffer
+Both classes do exactly the same thing, with one major difference: Safety vs. Speed.
+●	StringBuilder (The Fast One): Not "Thread-Safe." It's designed for use by a single thread (which is 99% of most apps). Because it doesn't worry about multiple threads, it is significantly faster.
+●	StringBuffer (The Safe One): "Thread-Safe" and "Synchronized." It ensures that if two parts of your program try to change the string at the same time, they won't corrupt the data. This extra caution makes it slower.
+________________________________________
+2. Understanding Capacity
+Unlike a standard String, these builders have an internal Capacity.
+●	Length: The number of characters actually inside.
+●	Capacity: The amount of total storage space currently allocated.
+●	How it grows: When you exceed the capacity, the builder automatically creates a larger internal array (usually doubling the size plus two) and copies the old data over.
+Pro Tip: If you know you're going to build a 1,000-character string, initialize it with new StringBuilder(1000). This prevents the "expensive" resizing process from happening multiple times.
+________________________________________
+3. The Hash Code: Creation and Maintenance
+In Java, hashCode() is a method that returns an integer representing the "identity" of the object’s data.
+For Strings
+The hash code for a String is calculated based on its contents using a specific mathematical formula:
+$$s[0] \cdot 31^{n-1} + s[1] \cdot 31^{n-2} + \dots + s[n-1]$$
+●	Because Strings are immutable, Java calculates the hash code once and caches it. It never changes, which makes Strings perfect keys for HashMap.
+For StringBuilder/StringBuffer
+●	These classes do not override the hashCode() method from the Object class.
+●	Their hash code is based on their memory address, not their content.
+●	Warning: Even if two StringBuilder objects contain the exact same text, they will have different hash codes.
+________________________________________
+4. Comprehensive Code Example
+This code demonstrates manipulation, capacity checks, and the hash code behavior.
+Java
+public class BuilderAndHash {
+    public static void main(String[] args) {
+        // 1. Initializing with custom capacity
+        StringBuilder sb = new StringBuilder(10); 
+        
+        System.out.println("Initial Capacity: " + sb.capacity()); // 10
+        
+        // 2. Manipulations
+        sb.append("Hello");
+        sb.insert(5, " Java");      // "Hello Java"
+        sb.replace(0, 5, "Hi");     // "Hi Java"
+        sb.reverse();               // "avaJ iH"
+        sb.delete(0, 5);            // "iH" (Wait, it's reversed!)
+        
+        System.out.println("Final Content: " + sb);
+
+        // 3. Capacity Growth
+        StringBuilder dynamic = new StringBuilder("Small");
+        System.out.println("Start Capacity: " + dynamic.capacity()); // Default is length + 16
+        dynamic.append(" This is a very long string to force a resize.");
+        System.out.println("New Capacity: " + dynamic.capacity());
+
+        // 4. Hash Code Demonstration
+        String str1 = "Java";
+        String str2 = "Java";
+        System.out.println("String Hash (Content-based): " + str1.hashCode());
+        System.out.println("Matches str2? " + (str1.hashCode() == str2.hashCode()));
+
+        StringBuilder sb1 = new StringBuilder("Java");
+        StringBuilder sb2 = new StringBuilder("Java");
+        System.out.println("SB1 Hash (Address-based): " + sb1.hashCode());
+        System.out.println("SB2 Hash (Address-based): " + sb2.hashCode());
+        // Notice: sb1.hashCode() != sb2.hashCode() even though content is the same!
+    }
+}
+
+Strings (str1.hashCode() == str2.hashCode())
+●	In Java, the String class overrides hashCode() to compute a value based on the sequence of characters.
+●	Formula:
+hashCode=s[0]\cdot 31^{n-1}+s[1]\cdot 31^{n-2}+\dots +s[n-1]
+●	where s[i] is the Unicode value of the character.
+●	So, two Strings with the same characters will always have the same hash code, even if they are different objects in memory.
+StringBuilder (sb1.hashCode() and sb2.hashCode())
+●	Unlike String, the StringBuilder class does not override hashCode().
+●	It inherits the default implementation from Object, which is typically derived from the object’s memory address.
+●	That means two different StringBuilder objects with the same content will almost always have different hash codes, because they are distinct objects in memory.
+Thread Safe vs. Not Thread Safe
+Not Thread Safe (StringBuilder)
+If a class is not thread safe, it means it does not have any internal protection.
+●	The Risk: If Thread A is adding "Hello" and Thread B is adding "World" at the same time, the internal character array might skip a letter or crash (throw an exception).
+●	The Benefit: It is extremely fast because it doesn't waste time checking if someone else is using it.
+Thread Safe (StringBuffer)
+If a class is thread safe, it guarantees that the internal data will remain consistent even if multiple threads attack it at once.
+●	The Mechanism: It uses Locks. If Thread A is using the object, Thread B must wait in line until Thread A is finished.
++1
+●	The Downside: It is slower because of the overhead of managing those "waits" and "locks."
+________________________________________
+2. Synchronized vs. Not Synchronized
+These terms describe how thread safety is actually implemented in the code.
+Synchronized
+In Java, the synchronized keyword is a "lock." When a method is synchronized:
+1.	A thread "grabs the key" to the object.
+2.	It performs its work (like append).
+3.	It "releases the key."
+4.	StringBuffer has almost all its methods marked as synchronized.
+Not Synchronized
+A method that is not synchronized has no "lock."
+1.	Any thread can enter the method at any time.
+2.	StringBuilder methods are not synchronized.
+________________________________________
+3. StringBuilder vs. StringBuffer: The Showdown
+Feature	StringBuilder	StringBuffer
+Thread Safety	No (Not Thread Safe)	Yes (Thread Safe)
+Synchronization	No (Not Synchronized)	Yes (Synchronized)
+Speed	Fast (High performance)	Slower (Locking overhead)
+When to use?	99% of the time (Single-thread)	Rare (Multi-threaded shared logic)
+Introduced	Java 1.5	Java 1.0 (Old school)
+[Image comparing StringBuilder vs StringBuffer performance and thread access]
+
+
+
+Selection Sort is a simple comparison-based sorting algorithm. It is efficient for small data sets but generally performs worse than algorithms like Insertion Sort or Merge Sort for larger lists.
+How It Works
+Selection Sort divides the input list into two parts:
+1.	Sorted Sublist: This is built up from left to right at the front (left) of the list.
+2.	Unsorted Sublist: The remaining items that occupy the rest of the list.
+Initially, the sorted sublist is empty and the unsorted sublist is the entire input list. The algorithm proceeds by finding the smallest (or largest, depending on sorting order) element in the unsorted sublist, swapping it with the leftmost unsorted element, and moving the sublist boundaries one element to the right.
+Step-by-Step Visualization
+Imagine we have the following array: [64, 25, 12, 22, 11]
+Pass 1:
+●	The entire list is unsorted: [64, 25, 12, 22, 11]
+●	Find the minimum element in the unsorted array (which is 11).
+●	Swap 11 with the first element (64).
+●	Result: [11, 25, 12, 22, 64] (Sorted: 11, Unsorted: 25, 12, 22, 64)
+Pass 2:
+●	Look at the unsorted sublist: [25, 12, 22, 64]
+●	Find the minimum element in this remaining part (which is 12).
+●	Swap 12 with the first element of the unsorted part (25).
+●	Result: [11, 12, 25, 22, 64] (Sorted: 11, 12, Unsorted: 25, 22, 64)
+Pass 3:
+●	Look at the unsorted sublist: [25, 22, 64]
+●	Find the minimum element (which is 22).
+●	Swap 22 with 25.
+●	Result: [11, 12, 22, 25, 64]
+Pass 4:
+●	Look at the unsorted sublist: [25, 64]
+●	Find the minimum element (which is 25).
+●	It is already in the correct position, so no change occurs (or it swaps with itself).
+●	Result: [11, 12, 22, 25, 64]
+The list is now sorted.
+Complexity Analysis
+●	Time Complexity: $O(n^2)$
+o	This is because there are two nested loops. The outer loop runs $n$ times, and the inner loop runs $n-1$, $n-2$, ... times. Even if the array is already sorted, the algorithm still scans through the unsorted portion to verify the minimum, making the best-case complexity also $O(n^2)$.
+●	Space Complexity: $O(1)$
+o	It requires a small, constant amount of auxiliary memory for the swap variables, making it an in-place sorting algorithm.
+________________________________________
+Java Implementation
+Here is the complete Java code to implement Selection Sort.
+Java
+public class SelectionSort {
+
+    // Method to perform selection sort
+    public static void performSelectionSort(int[] arr) {
+        int n = arr.length;
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n - 1; i++) {
+            
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[min_idx]) {
+                    min_idx = j;
+                }
+            }
+
+            // Swap the found minimum element with the first element
+            // of the unsorted part
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+            
+            // Optional: Print array after every pass to see progress
+            // printArray(arr); 
+        }
+    }
+
+    // Utility method to print the array
+    public static void printArray(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    // Main method to test the algorithm
+    public static void main(String[] args) {
+        int[] data = {64, 25, 12, 22, 11};
+        
+        System.out.println("Original Array:");
+        printArray(data);
+
+        performSelectionSort(data);
+
+        System.out.println("\nSorted Array:");
+        printArray(data);
+    }
+}
+Key Advantages & Disadvantages
+Advantages	Disadvantages
+Simple to understand: The logic is straightforward.	Slow on large lists: $O(n^2)$ makes it inefficient for large datasets.
+Memory efficient: Requires no extra space ($O(1)$).	Not Stable: It may change the relative order of equal elements (e.g., swapping a 5 over another 5).
+Low writes: It makes the minimum number of swaps ($O(n)$) compared to other algorithms like Bubble Sort ($O(n^2)$ swaps).	
+
+
+
+
+
+
+
+
+
+Bubble Sort is another straightforward comparison-based sorting algorithm. It gets its name because smaller or larger elements "bubble" to the top (or end) of the list with each iteration, much like bubbles rising in a glass of water.
+How It Works
+Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted.
+With every full pass over the array, the largest unsorted element is guaranteed to be pushed to its correct position at the end of the array.
+Step-by-Step Visualization
+Imagine we have the following array: [5, 1, 4, 2, 8]
+Pass 1:
+●	Compare 5 and 1. Since 5 > 1, swap them: [1, 5, 4, 2, 8]
+●	Compare 5 and 4. Since 5 > 4, swap them: [1, 4, 5, 2, 8]
+●	Compare 5 and 2. Since 5 > 2, swap them: [1, 4, 2, 5, 8]
+●	Compare 5 and 8. Since 5 < 8, do nothing: [1, 4, 2, 5, 8]
+●	Notice how the largest element (8) has "bubbled" to the very end.
+Pass 2:
+●	Compare 1 and 4. Do nothing: [1, 4, 2, 5, 8]
+●	Compare 4 and 2. Since 4 > 2, swap them: [1, 2, 4, 5, 8]
+●	Compare 4 and 5. Do nothing: [1, 2, 4, 5, 8]
+●	We don't need to check 5 and 8 because we know 8 is already in place.
+Pass 3:
+●	Compare 1 and 2. Do nothing: [1, 2, 4, 5, 8]
+●	Compare 2 and 4. Do nothing: [1, 2, 4, 5, 8]
+●	Even though the array is sorted, the algorithm needs one final pass without any swaps to "know" that it is finished.
+Complexity Analysis
+●	Time Complexity: * Worst and Average Case: $O(n^2)$. This happens when the array is in reverse order, requiring maximum comparisons and swaps.
+o	Best Case: $O(n)$. If the array is already sorted, an optimized Bubble Sort (which uses a flag to check if any swaps happened) only takes one pass.
+●	Space Complexity: $O(1)$
+o	Like Selection Sort, it is an in-place algorithm and requires only a constant amount of extra memory for the temporary swap variable.
+________________________________________
+Java Implementation (Optimized)
+Here is the Java code for an optimized Bubble Sort. We include a swapped boolean flag. If a full pass occurs and nothing was swapped, the algorithm terminates early, saving time.
+Java
+public class BubbleSort {
+
+    public static void performBubbleSort(int[] arr) {
+        int n = arr.length;
+        boolean swapped;
+
+        // Outer loop for the number of passes
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+
+            // Inner loop for comparing adjacent elements.
+            // Notice we do (n - i - 1) because the last 'i' elements are already sorted.
+            for (int j = 0; j < n - i - 1; j++) {
+                
+                // Swap if the current element is greater than the next element
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    
+                    swapped = true; // Mark that a swap occurred
+                }
+            }
+
+            // If no two elements were swapped in inner loop, the array is sorted
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+
+    // Utility method to print the array
+    public static void printArray(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] data = {5, 1, 4, 2, 8};
+        
+        System.out.println("Original Array:");
+        printArray(data);
+
+        performBubbleSort(data);
+
+        System.out.println("\nSorted Array:");
+        printArray(data);
+    }
+}
+Key Advantages & Disadvantages
+Advantages	Disadvantages
+Simple to implement: Very easy to write and understand.	Extremely slow: $O(n^2)$ makes it highly inefficient for large datasets, often performing worse than Selection Sort due to the high number of swaps.
+Stable: It does not change the relative order of equal elements (e.g., if you have two 4s, the first one will remain first).	High writes: It constantly swaps elements memory, making it a poor choice if writing to memory is expensive.
+Detects sorted lists: The optimized version can easily detect if a list is already sorted, finishing in $O(n)$ time.	
+
+
+Insertion Sort is another simple, comparison-based sorting algorithm. The best way to understand it is to think about how you might sort a hand of playing cards: you pick up one card at a time and insert it into its correct position among the cards you are already holding.
+How It Works
+Like Selection Sort, Insertion Sort conceptually divides the array into a sorted part and an unsorted part.
+1.	The first element is considered already sorted.
+2.	The algorithm picks the next element from the unsorted part (let's call it the "key").
+3.	It compares this key to the elements in the sorted part, moving from right to left.
+4.	It shifts all elements larger than the key one position to the right to make space.
+5.	It inserts the key into the newly created empty space.
+6.	This repeats until the unsorted part is empty.
+Step-by-Step Visualization
+Let's trace the array: [12, 11, 13, 5, 6]
+Pass 1:
+●	Sorted part: [12], Unsorted part: [11, 13, 5, 6]
+●	Key = 11.
+●	Compare 11 with 12. Since 12 > 11, shift 12 to the right.
+●	Insert 11 at the beginning.
+●	Result: [11, 12, 13, 5, 6]
+Pass 2:
+●	Sorted part: [11, 12], Unsorted part: [13, 5, 6]
+●	Key = 13.
+●	Compare 13 with 12. Since 12 < 13, no shifting is needed.
+●	Result: [11, 12, 13, 5, 6]
+Pass 3:
+●	Sorted part: [11, 12, 13], Unsorted part: [5, 6]
+●	Key = 5.
+●	Compare 5 with 13 (shift 13), then 12 (shift 12), then 11 (shift 11).
+●	Insert 5 at the beginning.
+●	Result: [5, 11, 12, 13, 6]
+Pass 4:
+●	Sorted part: [5, 11, 12, 13], Unsorted part: [6]
+●	Key = 6.
+●	Compare 6 with 13 (shift 13), then 12 (shift 12), then 11 (shift 11). 6 is greater than 5, so stop shifting.
+●	Insert 6 after 5.
+●	Result: [5, 6, 11, 12, 13]
+The list is now sorted.
+Complexity Analysis
+●	Time Complexity: * Worst and Average Case: $O(n^2)$. This happens if the array is in reverse order, meaning every new element has to be compared against every element currently in the sorted part.
+o	Best Case: $O(n)$. If the array is already sorted, the inner loop never executes because the key is immediately found to be greater than the last element in the sorted portion.
+●	Space Complexity: $O(1)$
+o	It is an in-place algorithm, requiring only a single variable to hold the "key" value being inserted.
+________________________________________
+
+
+
+
+Java Implementation
+Here is the Java code for Insertion Sort. Notice how it uses a while loop to shift elements to the right.
+Java
+public class InsertionSort {
+
+    // Method to perform insertion sort
+    public static void performInsertionSort(int[] arr) {
+        int n = arr.length;
+        
+        // Start from the second element (index 1) 
+        // because the first element is considered sorted
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+
+            // Move elements of arr[0..i-1] that are greater than the key
+            // to one position ahead of their current position
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            
+            // Insert the key into its correct position
+            arr[j + 1] = key;
+        }
+    }
+
+    // Utility method to print the array
+    public static void printArray(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    // Main method to test the algorithm
+    public static void main(String[] args) {
+        int[] data = {12, 11, 13, 5, 6};
+        
+        System.out.println("Original Array:");
+        printArray(data);
+
+        performInsertionSort(data);
+
+        System.out.println("\nSorted Array:");
+        printArray(data);
+    }
+}
+Key Advantages & Disadvantages
+Advantages	Disadvantages
+Adaptive: Highly efficient for data sets that are already substantially sorted (runs in $O(n)$ time).	Slow on large lists: Like Bubble and Selection sort, the $O(n^2)$ worst-case time makes it inefficient for large datasets.
+Stable: Does not change the relative order of equal elements.	High writes on reverse sorted data: Can involve a lot of element shifting in memory if the data is heavily unsorted.
+Online capability: It can sort a list as it receives it, element by element (e.g., streaming data).	
+Excellent for small arrays: Often out-performs highly optimized algorithms like Quick Sort or Merge Sort on very small datasets (usually $<10$ elements), which is why those advanced algorithms sometimes switch to Insertion Sort for their base cases.	
+
+
+
+
+
+
+
+
+
+
+Stack is a linear data structure that follows the LIFO (Last In, First Out) principle. This means the last element added to the stack will be the first one to be removed. Think of it like a stack of plates in a cafeteria: you add plates to the top, and you take plates off the top.
+How It Works (Array Implementation)
+To implement a stack using an array, we need three primary components:
+1.	An Array: To store the elements.
+2.	Capacity: The maximum number of elements the stack can hold.
+3.	Top Pointer: An integer variable (usually initialized to -1) that keeps track of the index of the top element.
+Core Operations:
+●	Push: Add an element to the top. We increment the top pointer and place the new element at that index. If top reaches capacity - 1, the stack is in an Overflow state.
+●	Pop: Remove and return the top element. We read the element at the top index and then decrement the top pointer. If top is -1, the stack is empty, which is an Underflow state.
+●	Peek (or Top): Return the top element without removing it.
+●	isEmpty: Check if top == -1.
+●	isFull: Check if top == capacity - 1.
+Complexity Analysis
+●	Time Complexity: * push(): $O(1)$
+o	pop(): $O(1)$
+o	peek(): $O(1)$
+o	All core operations take constant time because we directly access the array index using the top pointer without any loops.
+●	Space Complexity: $O(n)$ where $n$ is the maximum capacity of the stack, as we need to allocate memory for the entire array upfront.
+________________________________________
+Java Implementation
+Here is a complete Java implementation of a Stack using an array, including error handling for overflow and underflow conditions.
+Java
+class CustomStack {
+    private int[] arr;
+    private int top;
+    private int capacity;
+
+    // Constructor to initialize the stack
+    public CustomStack(int size) {
+        arr = new int[size];
+        capacity = size;
+        top = -1; // -1 indicates the stack is initially empty
+    }
+
+    // Method to add an element to the stack
+    public void push(int x) {
+        if (isFull()) {
+            System.out.println("Stack Overflow! Cannot push " + x);
+            return;
+        }
+        // Increment top and insert the element
+        arr[++top] = x;
+        System.out.println("Pushed " + x + " to the stack.");
+    }
+
+    // Method to remove and return the top element
+    public int pop() {
+        if (isEmpty()) {
+            System.out.println("Stack Underflow! The stack is empty.");
+            return -1; // Returning -1 to indicate error (assuming positive data)
+        }
+        // Return the current top element and decrement top
+        System.out.println("Popped " + arr[top] + " from the stack.");
+        return arr[top--];
+    }
+
+    // Method to return the top element without removing it
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("The stack is empty.");
+            return -1;
+        }
+        return arr[top];
+    }
+
+    // Method to check if the stack is empty
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    // Method to check if the stack is full
+    public boolean isFull() {
+        return top == capacity - 1;
+    }
+
+    // Method to get the current size of the stack
+    public int size() {
+        return top + 1;
+    }
+
+    public static void main(String[] args) {
+        // Create a stack of capacity 5
+        CustomStack stack = new CustomStack(5);
+
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        System.out.println("Top element is: " + stack.peek());
+        System.out.println("Current stack size: " + stack.size());
+
+        stack.pop();
+        stack.pop();
+        
+        System.out.println("Is stack empty? " + stack.isEmpty());
+        
+        // Testing underflow
+        stack.pop();
+        stack.pop(); 
+    }
+}
+
+
+
+
+
+
+
+
+
+Key Advantages & Disadvantages
+Advantages	Disadvantages
+Fast execution: All operations (push, pop, peek) happen in strictly $O(1)$ time.	Fixed Size: The size of the array must be known and defined upfront. It cannot grow dynamically (unless you implement a dynamic array resizing logic, which adds overhead).
+Memory efficient: It does not require extra memory for pointers (unlike a Linked List implementation).	Memory Wastage: If the allocated array size is much larger than the actual number of elements used, the unused memory is wasted.
+Cache locality: Since arrays are stored in contiguous memory blocks, CPU caching is highly efficient.	
+
+Queue is a linear data structure that follows the FIFO (First In, First Out) principle. This means the first element added to the queue will be the first one to be removed. Think of it like a line of people waiting at a ticket counter: the first person to get in line is the first person to get their ticket and leave.
+How It Works (Array Implementation)
+To efficiently implement a queue using an array, we typically use a Circular Queue approach. A standard array queue wastes space because as you remove items from the front, those empty slots can't be reused unless you shift all elements (which takes $O(n)$ time). A circular queue solves this by wrapping the end of the queue back around to the beginning of the array.
+We need a few primary components:
+1.	An Array: To store the elements.
+2.	Capacity: The maximum number of elements.
+3.	Front Pointer: Tracks the index of the first element (the one to be removed next).
+4.	Rear Pointer: Tracks the index where the newest element was just added.
+5.	Current Size: A counter to keep track of how many elements are currently in the queue.
+Core Operations:
+●	Enqueue: Add an element to the rear of the queue. We calculate the new rear position using modulo arithmetic (rear + 1) % capacity to wrap around if needed, place the item, and increment the size.
+●	Dequeue: Remove and return the front element. We read the element at the front index, move the front pointer forward using (front + 1) % capacity, and decrement the size.
+●	Peek (or Front): Return the front element without removing it.
+●	isEmpty: Check if currentSize == 0.
+●	isFull: Check if currentSize == capacity.
+Complexity Analysis
+●	Time Complexity: * enqueue(): $O(1)$
+o	dequeue(): $O(1)$
+o	peek(): $O(1)$
+o	By using the circular array logic, we avoid shifting elements, allowing all operations to run in constant time.
+●	Space Complexity: $O(n)$ where $n$ is the maximum capacity of the queue, as memory is allocated for the entire array upfront.
+________________________________________
+Java Implementation
+Here is a complete Java implementation of a Circular Queue using an array, including error handling for overflow and underflow conditions.
+Java
+class CustomQueue {
+    private int[] arr;
+    private int front;
+    private int rear;
+    private int capacity;
+    private int currentSize;
+
+    // Constructor to initialize the queue
+    public CustomQueue(int size) {
+        arr = new int[size];
+        capacity = size;
+        front = 0;
+        rear = -1;
+        currentSize = 0;
+    }
+
+    // Method to add an element to the queue (Enqueue)
+    public void enqueue(int x) {
+        if (isFull()) {
+            System.out.println("Queue Overflow! Cannot enqueue " + x);
+            return;
+        }
+        
+        // Circular increment for rear
+        rear = (rear + 1) % capacity;
+        arr[rear] = x;
+        currentSize++;
+        
+        System.out.println("Enqueued " + x + " to the queue.");
+    }
+
+    // Method to remove and return the front element (Dequeue)
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue Underflow! The queue is empty.");
+            return -1; // Returning -1 to indicate error
+        }
+        
+        int dequeuedElement = arr[front];
+        
+        // Circular increment for front
+        front = (front + 1) % capacity;
+        currentSize--;
+        
+        System.out.println("Dequeued " + dequeuedElement + " from the queue.");
+        return dequeuedElement;
+    }
+
+    // Method to return the front element without removing it
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("The queue is empty.");
+            return -1;
+        }
+        return arr[front];
+    }
+
+    // Method to check if the queue is empty
+    public boolean isEmpty() {
+        return currentSize == 0;
+    }
+
+    // Method to check if the queue is full
+    public boolean isFull() {
+        return currentSize == capacity;
+    }
+
+    // Method to get the current size of the queue
+    public int size() {
+        return currentSize;
+    }
+
+    public static void main(String[] args) {
+        // Create a queue of capacity 5
+        CustomQueue queue = new CustomQueue(5);
+
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+        queue.enqueue(40);
+        
+        System.out.println("Front element is: " + queue.peek());
+        
+        queue.dequeue();
+        queue.dequeue();
+        
+        queue.enqueue(50);
+        queue.enqueue(60);
+        
+        // This will trigger the circular behavior
+        queue.enqueue(70); 
+        
+        // This will cause an overflow
+        queue.enqueue(80); 
+        
+        System.out.println("Current queue size: " + queue.size());
+    }
+}
+Key Advantages & Disadvantages
+Advantages	Disadvantages
+Fast execution: All core operations happen in strictly $O(1)$ time thanks to the circular approach.	Fixed Size: Just like the array-based stack, the capacity must be defined upfront.
+Memory efficiency: Reuses empty spaces at the beginning of the array when elements are dequeued, preventing memory waste.	Complexity: The modulo arithmetic makes the implementation slightly more complex than a basic stack.
+Predictable memory use: The memory footprint is strictly bound by the capacity, with no dynamic allocation overhead during runtime.	
+
+
+
+Binary Search is an incredibly efficient searching algorithm used to find the position of a specific value within a sorted array.
+The best analogy for Binary Search is looking up a word in a physical dictionary. You don't read page by page from the beginning (which would be a Linear Search). Instead, you open the book roughly to the middle. If the word you are looking for comes alphabetically before the page you opened to, you ignore the entire right half of the book and repeat the process on the left half. You keep halving the search space until you find the word.
+Crucial Prerequisite: The array must be sorted for Binary Search to work.
+How It Works
+Binary Search maintains a search space defined by a left boundary and a right boundary.
+1.	It calculates the mid index between the left and right boundaries.
+2.	It compares the target value to the element at the mid index:
+o	If the target equals the middle element, the search is complete, and the index is returned.
+o	If the target is less than the middle element, the target must be in the left half. The right boundary is moved to mid - 1.
+o	If the target is greater than the middle element, the target must be in the right half. The left boundary is moved to mid + 1.
+3.	This process repeats until the target is found or the left boundary crosses the right boundary (meaning the element is not in the array).
+Step-by-Step Visualization
+Let's search for the target value 23 in this sorted array: [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+Step 1:
+●	Array: [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+●	left = 0, right = 9
+●	mid = (0 + 9) / 2 = 4. The value at index 4 is 16.
+●	Compare: 23 > 16. Since the target is greater, we eliminate the left half (indices 0-4).
+●	New left = mid + 1 = 5.
+Step 2:
+●	Current search space: [23, 38, 56, 72, 91] (Indices 5 to 9)
+●	left = 5, right = 9
+●	mid = (5 + 9) / 2 = 7. The value at index 7 is 56.
+●	Compare: 23 < 56. Since the target is smaller, we eliminate the right half (indices 7-9).
+●	New right = mid - 1 = 6.
+Step 3:
+●	Current search space: [23, 38] (Indices 5 to 6)
+●	left = 5, right = 6
+●	mid = (5 + 6) / 2 = 5. The value at index 5 is 23.
+●	Compare: 23 == 23. Target found! We return index 5.
+Complexity Analysis
+●	Time Complexity: * Worst and Average Case: $O(\log n)$. Every time the algorithm runs, it cuts the search space in half. For an array of 1 million elements, it takes at most roughly 20 comparisons to find any value.
+o	Best Case: $O(1)$. This happens if the target happens to be the exact middle element on the very first check.
+●	Space Complexity: $O(1)$
+o	The standard iterative approach uses a constant amount of extra memory for the left, right, and mid pointers. (Note: A recursive implementation would take $O(\log n)$ space due to the call stack).
+________________________________________
+Java Implementation (Iterative)
+Here is the robust Java implementation for an iterative Binary Search.
+Best Practice Note: Notice how mid is calculated as left + (right - left) / 2. While (left + right) / 2 works for small arrays, it can cause an integer overflow error in Java if left and right are very large numbers.
+Java
+public class BinarySearch {
+
+    // Method to perform binary search
+    public static int performBinarySearch(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            // Calculate mid to avoid integer overflow
+            int mid = left + (right - left) / 2;
+
+            // Check if target is present at mid
+            if (arr[mid] == target) {
+                return mid; // Target found
+            }
+
+            // If target is greater, ignore the left half
+            if (arr[mid] < target) {
+                left = mid + 1;
+            } 
+            // If target is smaller, ignore the right half
+            else {
+                right = mid - 1;
+            }
+        }
+
+        // Target was not found in the array
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        // The array MUST be sorted for binary search to work
+        int[] sortedData = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+        int targetValue = 23;
+
+        System.out.println("Searching for: " + targetValue);
+
+        int resultIndex = performBinarySearch(sortedData, targetValue);
+
+        if (resultIndex != -1) {
+            System.out.println("Element " + targetValue + " found at index: " + resultIndex);
+        } else {
+            System.out.println("Element " + targetValue + " not found in the array.");
+        }
+        
+        // Testing a value not in the array
+        int missingTarget = 100;
+        int missingResult = performBinarySearch(sortedData, missingTarget);
+        System.out.println("\nSearching for: " + missingTarget);
+        System.out.println("Result: " + (missingResult == -1 ? "Not found" : "Found at " + missingResult));
+    }
+}
+Key Advantages & Disadvantages
+Advantages	Disadvantages
+Blazing Fast: $O(\log n)$ time complexity makes it exceptionally fast for massive datasets compared to Linear Search's $O(n)$.	Requires Sorted Data: If the data is unsorted, you must sort it first. Sorting takes at best $O(n \log n)$ time, which negates the speed of a single binary search.
+Low Memory Footprint: The iterative version requires only a tiny, constant amount of memory ($O(1)$).	Requires Random Access: It needs to jump directly to the middle index instantly. Therefore, it works great on Arrays, but is highly inefficient on standard Linked Lists.
+
+
+
+import java.util.Scanner;
+
+// Pure Data Structure Class
+class LinkedList {
+
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    Node head = null;
+    Node tail = null; // Adding a tail pointer optimizes end-insertions
+
+    // --- INSERTION METHODS ---
+
+    public void insertBegin(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        System.out.println("Inserted " + data + " at beginning.");
+    }
+
+    public void insertMid(int data, int pos) {
+        if (pos <= 1 || head == null) {
+            insertBegin(data);
+            return;
+        }
+
+        Node current = head;
+        int i = 1;
+        
+        // Traverse to the node JUST BEFORE the insertion position
+        while (i < pos - 1 && current.next != null) {
+            current = current.next;
+            i++;
+        }
+
+        Node newNode = new Node(data);
+        newNode.next = current.next;
+        current.next = newNode;
+
+        // If inserted at the very end, update the tail
+        if (newNode.next == null) {
+            tail = newNode;
+        }
+        System.out.println("Inserted " + data + " at position " + pos + ".");
+    }
+
+    public void insertEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            tail.next = newNode; // O(1) insertion thanks to tail pointer
+            tail = newNode;
+        }
+        System.out.println("Inserted " + data + " at end.");
+    }
+
+    // --- DELETION METHODS ---
+
+    public void deleteBegin() {
+        if (head == null) {
+            System.out.println("List is empty. Nothing to delete.");
+            return;
+        }
+        System.out.println("Deleted " + head.data + " from beginning.");
+        head = head.next;
+        
+        // If the list became empty after deletion, clear the tail too
+        if (head == null) {
+            tail = null;
+        }
+    }
+
+    public void deleteMid(int pos) {
+        if (head == null) {
+            System.out.println("List is empty. Nothing to delete.");
+            return;
+        }
+
+        if (pos <= 1) {
+            deleteBegin();
+            return;
+        }
+
+        Node current = head;
+        Node previous = null;
+        int i = 1;
+
+        // Traverse to the exact position to delete
+        while (i < pos && current != null) {
+            previous = current;
+            current = current.next;
+            i++;
+        }
+
+        if (current == null) {
+            System.out.println("Position out of bounds.");
+            return;
+        }
+
+        // Link previous node to the next node
+        System.out.println("Deleted " + current.data + " at position " + pos + ".");
+        previous.next = current.next;
+
+        // If we deleted the last node, update the tail
+        if (previous.next == null) {
+            tail = previous;
+        }
+    }
+
+    public void deleteEnd() {
+        if (head == null) {
+            System.out.println("List is empty. Nothing to delete.");
+            return;
+        }
+        
+        // If there's only one node
+        if (head == tail) {
+            System.out.println("Deleted " + head.data + " from end.");
+            head = tail = null;
+            return;
+        }
+
+        Node current = head;
+        Node previous = null;
+        
+        // Traverse to the last node
+        while (current.next != null) {
+            previous = current;
+            current = current.next;
+        }
+        
+        // Remove the last node
+        System.out.println("Deleted " + current.data + " from end.");
+        previous.next = null;
+        tail = previous; // Update tail
+    }
+
+    // --- UTILITY METHODS ---
+
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        
+        Node current = head;
+        System.out.print("List elements: ");
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("NULL"); // Visual aid to show the end of the list
+    }
+}
+
+// User Interface / Application Class
+public class SinglyLinkedListApp {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        LinkedList list = new LinkedList();
+
+        // 1. Initial List Creation
+        int c = 1;
+        System.out.println("--- Create Initial List ---");
+        while (c == 1) {
+            System.out.print("Enter data: ");
+            int data = sc.nextInt();
+            list.insertEnd(data); // Reusing the insertEnd method instead of duplicating code
+
+            System.out.print("Enter 1 to continue, 0 to stop: ");
+            c = sc.nextInt();
+        }
+
+        list.display();
+
+        // 2. Main Menu Loop
+        int mainChoice;
+        do {
+            System.out.println("\n=== Main Menu ===");
+            System.out.println("1: Insert | 2: Delete | 3: Display | 0: Exit");
+            System.out.print("Enter choice: ");
+            mainChoice = sc.nextInt();
+            
+            switch (mainChoice) {
+                case 1: 
+                    handleInsertMenu(sc, list); 
+                    break;
+                case 2: 
+                    handleDeleteMenu(sc, list); 
+                    break;
+                case 3: 
+                    list.display(); 
+                    break;
+                case 0: 
+                    System.out.println("Exiting program..."); 
+                    break;
+                default: 
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (mainChoice != 0);
+
+        sc.close();
+    }
+
+    private static void handleInsertMenu(Scanner sc, LinkedList list) {
+        System.out.println("\n--- Insert Menu ---");
+        System.out.println("1: Begin | 2: Mid | 3: End | 0: Back");
+        System.out.print("Enter choice: ");
+        int choice = sc.nextInt();
+
+        if (choice == 0) return;
+
+        System.out.print("Enter data to insert: ");
+        int data = sc.nextInt();
+
+        switch (choice) {
+            case 1: 
+                list.insertBegin(data); 
+                break;
+            case 2: 
+                System.out.print("Enter insert position: ");
+                int pos = sc.nextInt();
+                list.insertMid(data, pos); 
+                break;
+            case 3: 
+                list.insertEnd(data); 
+                break;
+            default: 
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    private static void handleDeleteMenu(Scanner sc, LinkedList list) {
+        System.out.println("\n--- Delete Menu ---");
+        System.out.println("1: Begin | 2: Mid | 3: End | 0: Back");
+        System.out.print("Enter choice: ");
+        int choice = sc.nextInt();
+
+        switch (choice) {
+            case 1: 
+                list.deleteBegin(); 
+                break;
+            case 2: 
+                System.out.print("Enter delete position: ");
+                int pos = sc.nextInt();
+                list.deleteMid(pos); 
+                break;
+            case 3: 
+                list.deleteEnd(); 
+                break;
+            case 0: 
+                break;
+            default: 
+                System.out.println("Invalid choice.");
+        }
+    }
+}
