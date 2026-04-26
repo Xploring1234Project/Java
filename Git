@@ -1,0 +1,62 @@
+1. What is Git and Why Use It?
+Git is a Distributed Version Control System (DVCS). Unlike older systems that required a central server to save history, Git gives every developer a full copy of the project’s history on their own machine.
+Why use it?
+•	Collaboration: Multiple developers can work on the "Login Page" and the "Payment Page" simultaneously without interference.
+•	Version Control: If you delete a critical file by mistake, you can recover it in seconds.
+•	Experimentation: You can create a "Branch," try a crazy idea, and if it fails, simply delete the branch without touching the working code.
+•	Traceability: Every line of code is tagged with a name, date, and reason (the commit message).
+________________________________________
+2. Command Deep Dive
+System Configuration & Navigation
+Before Git knows what to do, your computer needs to know who you are and where you are.
+•	git config --global user.name "name" & user.email "mail": These settings tag your commits. Without these, Git won't let you commit because it doesn't know who to credit (or blame) for the changes.
+•	git config --list: Displays all your current settings, including your name, email, and default editor.
+•	mkdir <folder>: A terminal command to create a new directory (folder).
+•	cd <folder>: "Change Directory." Moves your terminal's focus into a specific folder.
+•	ls / ls -a: ls lists visible files. ls -a lists all files, including hidden ones like the .git folder where Git stores your history.
+•	clear: Wipes the terminal screen so you have a fresh workspace.
+Initializing and Cloning
+•	git init: The "Big Bang" of a project. It creates a hidden .git folder. Until you run this, your folder is just a folder; after this, it is a Repository.
+•	git clone "url": Downloads an entire project from a remote server (like GitHub) including all its history and branches.
+The Staging Workflow
+This is how you move code from your screen into Git's memory.
+•	git status: Your best friend. It tells you which files are modified, which are tracked, and what is ready to be committed.
+•	git add <filename>: Specifically targets one file to be moved to the "Staging Area" (the waiting room).
+•	git add .: The "Add All" command. It stages every change in the current directory and subdirectories.
+•	git commit -m "message": Takes everything in the Staging Area and wraps it into a permanent "Snapshot" with a descriptive label.
+Remote Connections
+•	git remote add origin "url": Tells your local Git repo that there is a "master copy" on a server (like GitHub) and gives it the nickname "origin."
+•	git remote -v: Lists the URLs of the remote servers you are connected to so you can verify where your code is going.
+•	git push origin main: Sends your local commits to the "main" branch on the remote server "origin."
+•	git push -u origin main: The -u stands for "upstream." It links your local branch to the remote one so that in the future, you can just type git push without specifying the name.
+Branching and Switching
+•	git branch: Lists all branches in your project.
+•	git branch -M main: Renames your current primary branch to "main" (this is the modern standard, replacing "master").
+•	git checkout <branch>: Switches your files from the current branch to another one.
+•	git checkout -b <name>: A combo command: it creates a new branch and immediately switches you into it.
+•	git switch -c <name>: The modern, clearer version of checkout -b.
+•	git branch -d <name>: Deletes a branch once you are finished with it (usually after merging).
+________________________________________
+3. Advanced Operations & Undoing Changes
+•	git diff <branch>: Shows the exact line-by-line differences between your current branch and another.
+•	git merge <branch>: Takes the history from the specified branch and integrates it into your current branch.
+•	git pull origin main: Fetches the latest code from the server and immediately tries to merge it into your local code.
+•	git reset <hash>: Moves your "Time Machine" back to a specific commit. The files stay on your computer, but the "Commit" is undone.
+•	git reset --hard <hash>: Dangerous. Wipes everything out and reverts your files to exactly how they were at that specific commit. You will lose unsaved work.
+•	git reset HEAD~1: Undoes the very last commit and puts those changes back into your working directory.
+________________________________________
+4. Understanding Merge Conflicts
+Why do they occur?
+A conflict happens when two people (or two branches) change the same line of the same file in different ways, and then try to merge them. Git is smart, but it doesn't know which version is "right." It stops the merge and asks the human to decide.
+How to resolve them:
+1.	Run git status: Git will tell you which files are "Unmerged."
+2.	Open the file: You will see markers like this:
+Plaintext
+<<<<<<< HEAD (Current Change)
+Blue Background
+=======
+Red Background
+>>>>>>> feature-branch (Incoming Change)
+3.	Edit: Manually delete the markers (<<<<, ====, >>>>) and keep the code you actually want.
+4.	Finish: Once the file is fixed, run git add <file> and then git commit. The conflict is resolved!
+
