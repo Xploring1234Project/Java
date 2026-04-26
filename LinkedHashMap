@@ -1,0 +1,101 @@
+LinkedHashMap in Java
+`LinkedHashMap` is a class in `java.util` that implements Map, Cloneable, and Serializable.
+It is a hash table + linked list implementation of the Map interface, storing key-value pairs while maintaining insertion order.
+Key Characteristics
+●	Stores unique keys and allows one null key.
+●	Values can be null (multiple null values allowed).
+●	Maintains insertion order of mappings.
+●	Provides constant-time performance for get and put operations (on average).
+●	Not synchronized (use Collections.synchronizedMap() for thread safety).
+Categorized Methods
+1. Adding / Updating Elements
+●	`put(K key, V value)` – Associates value with key.
+●	`putAll(Map m)` – Copies all mappings from another map.
+●	`putIfAbsent(K key, V value)` – Adds only if key is not already mapped.
+2. Accessing Elements
+●	`get(Object key)` – Returns value for key.
+●	`getOrDefault(Object key, V defaultValue)` – Returns value or default if key not found.
+3. Removing Elements
+●	`remove(Object key)` – Removes mapping for key.
+●	`remove(Object key, Object value)` – Removes entry only if key maps to given value.
+●	`clear()` – Removes all mappings.
+4. Searching & Checking
+●	`containsKey(Object key)` – Checks if key exists.
+●	`containsValue(Object value)` – Checks if value exists.
+●	`isEmpty()` – Checks if empty.
+●	`size()` – Returns number of mappings.
+●	`equals(Object o)` – Compares with another map.
+●	`hashCode()` – Returns hash code.
+5. Iteration Methods
+●	`keySet()` – Returns set of keys (in insertion order).
+●	`values()` – Returns collection of values.
+●	`entrySet()` – Returns set of key-value pairs.
+●	`forEach(BiConsumer action)` – Performs action for each entry.
+●	`spliterator()` – Returns spliterator.
+6. Advanced Operations
+●	`compute(K key, BiFunction remappingFunction)` – Computes new value for key.
+●	`computeIfAbsent(K key, Function mappingFunction)` – Computes value if key not present.
+●	`computeIfPresent(K key, BiFunction remappingFunction)` – Computes value if key present.
+●	`merge(K key, V value, BiFunction remappingFunction)` – Merges value with existing one.
+●	`replace(K key, V value)` – Replaces value for key.
+●	`replace(K key, V oldValue, V newValue)` – Replaces only if key maps to oldValue.
+●	`replaceAll(BiFunction function)` – Replaces all values.
+Java Code Demonstration
+import java.util.*;
+
+public class LinkedHashMapDemo {
+    public static void main(String[] args) {
+        LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+
+        // 1. Adding / Updating Elements
+        map.put(1, "A");
+        map.put(2, "B");
+        map.put(3, "C");
+        map.putIfAbsent(4, "D");
+        map.putAll(Map.of(5, "E", 6, "F"));
+
+        // 2. Accessing Elements
+        System.out.println(map.get(2));
+        System.out.println(map.getOrDefault(10, "Not Found"));
+
+        // 3. Removing Elements
+        map.remove(3);
+        map.remove(4, "D");
+        map.clear();
+
+        // 4. Searching & Checking
+        map.putAll(Map.of(7, "X", 8, "Y", 9, "Z"));
+        System.out.println(map.containsKey(7));
+        System.out.println(map.containsValue("Y"));
+        System.out.println(map.isEmpty());
+        System.out.println(map.size());
+        System.out.println(map.equals(Map.of(7, "X", 8, "Y", 9, "Z")));
+        System.out.println(map.hashCode());
+
+        // 5. Iteration
+        for (Integer key : map.keySet()) {
+            System.out.println("Key: " + key);
+        }
+        for (String value : map.values()) {
+            System.out.println("Value: " + value);
+        }
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println("Entry: " + entry.getKey() + " -> " + entry.getValue());
+        }
+        map.forEach((k, v) -> System.out.println(k + " = " + v));
+
+        Spliterator<Map.Entry<Integer, String>> spl = map.entrySet().spliterator();
+        spl.forEachRemaining(e -> System.out.println(e.getKey() + " : " + e.getValue()));
+
+        // 6. Advanced Operations
+        map.compute(7, (k, v) -> v + " Updated");
+        map.computeIfAbsent(10, k -> "New");
+        map.computeIfPresent(8, (k, v) -> v + " Present");
+        map.merge(9, "Merged", (oldVal, newVal) -> oldVal + "-" + newVal);
+        map.replace(7, "Replaced");
+        map.replace(8, "Y Present", "Replaced Again");
+        map.replaceAll((k, v) -> v + "!");
+
+        System.out.println("Final Map: " + map);
+    }
+}
