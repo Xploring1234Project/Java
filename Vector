@@ -1,0 +1,138 @@
+Vector in Java
+`Vector` is a class in `java.util` that implements List, RandomAccess, Cloneable, and Serializable.
+It is a resizable array similar to `ArrayList`, but it is synchronized, meaning it is thread-safe for concurrent access.
+
+#### Key Characteristics
+- Maintains insertion order.
+- Allows duplicate elements.
+- Provides random access in constant time.
+- Slower than `ArrayList` in single-threaded contexts due to synchronization overhead.
+- Useful when multiple threads access the same list.
+ 
+Categorized Methods
+1. Adding Elements
+●	`add(E e)` – Appends element at the end.
+●	`add(int index, E element)` – Inserts at specific index.
+●	`addAll(Collection c)` – Adds all elements from another collection.
+●	`addAll(int index, Collection c)` – Inserts all at given index.
+●	`insertElementAt(E obj, int index)` – Inserts element at index.
+●	`addElement(E obj)` – Adds element at the end.
+2. Accessing Elements
+●	`get(int index)` – Returns element at index.
+●	`firstElement()` – Returns first element.
+●	`lastElement()` – Returns last element.
+●	`elementAt(int index)` – Returns element at index.
+●	`elements()` – Returns enumeration of elements.
+3. Updating Elements
+●	`set(int index, E element)` – Replaces element at index.
+●	`setElementAt(E obj, int index)` – Sets element at index.
+●	`copyInto(Object[] anArray)` – Copies elements into array.
+4. Removing Elements
+●	`remove(int index)` – Removes element at index.
+●	`remove(Object o)` – Removes first occurrence.
+●	`removeAll(Collection c)` – Removes all matching elements.
+●	`removeElement(Object obj)` – Removes first occurrence.
+●	`removeElementAt(int index)` – Removes element at index.
+●	`removeAllElements()` – Clears vector.
+●	`clear()` – Removes all elements.
+5. Searching & Checking
+●	`contains(Object o)` – Checks if element exists.
+●	`containsAll(Collection c)` – Checks if all exist.
+●	`indexOf(Object o)` – First index of element.
+●	`indexOf(Object o, int index)` – Index from position.
+●	`lastIndexOf(Object o)` – Last index of element.
+●	`lastIndexOf(Object o, int index)` – Last index before position.
+●	`isEmpty()` – Checks if empty.
+●	`size()` – Returns number of elements.
+●	`capacity()` – Returns current capacity.
+●	`equals(Object o)` – Compares with another vector.
+●	`hashCode()` – Returns hash code.
+6. Iteration Methods
+●	`iterator()` – Returns iterator.
+●	`listIterator()` – Returns list iterator.
+●	`listIterator(int index)` – Returns list iterator starting at index.
+●	`forEach(Consumer action)` – Performs action for each element.
+●	`spliterator()` – Returns spliterator.
+●	`elements()` – Returns enumeration.
+7. Conversion Methods
+●	`toArray()` – Converts to array.
+●	`toArray(T[] a)` – Converts to typed array.
+8. Capacity Management
+●	`ensureCapacity(int minCapacity)` – Ensures minimum capacity.
+●	`trimToSize()` – Trims capacity to current size.
+●	`setSize(int newSize)` – Sets new size.
+9. Cloning
+●	`clone()` – Creates shallow copy.
+ 
+Java Code Demonstration
+
+import java.util.*;
+
+public class VectorDemo {
+    public static void main(String[] args) {
+        Vector<String> vector = new Vector<>();
+
+        // 1. Adding Elements
+        vector.add("A");
+        vector.add(1, "B");
+        vector.addAll(Arrays.asList("C", "D"));
+        vector.addAll(2, Arrays.asList("E", "F"));
+        vector.insertElementAt("Start", 0);
+        vector.addElement("End");
+
+        // 2. Accessing Elements
+        System.out.println(vector.get(2));
+        System.out.println(vector.firstElement());
+        System.out.println(vector.lastElement());
+        System.out.println(vector.elementAt(1));
+
+        // 3. Updating Elements
+        vector.set(2, "Updated");
+        vector.setElementAt("Replaced", 3);
+
+        // 4. Removing Elements
+        vector.remove(1);
+        vector.remove("C");
+        vector.removeElement("D");
+        vector.removeElementAt(0);
+        vector.removeAll(Arrays.asList("E", "F"));
+        vector.clear();
+
+        // 5. Searching & Checking
+        vector.addAll(Arrays.asList("X", "Y", "Z"));
+        System.out.println(vector.contains("X"));
+        System.out.println(vector.indexOf("Y"));
+        System.out.println(vector.lastIndexOf("Z"));
+        System.out.println(vector.isEmpty());
+        System.out.println(vector.size());
+        System.out.println(vector.capacity());
+
+        // 6. Iteration
+        Iterator<String> it = vector.iterator();
+        while (it.hasNext()) System.out.println(it.next());
+
+        ListIterator<String> lit = vector.listIterator();
+        while (lit.hasNext()) System.out.println(lit.next());
+
+        Enumeration<String> en = vector.elements();
+        while (en.hasMoreElements()) System.out.println(en.nextElement());
+
+        vector.forEach(System.out::println);
+        Spliterator<String> spl = vector.spliterator();
+        spl.forEachRemaining(System.out::println);
+
+        // 7. Conversion
+        Object[] arr = vector.toArray();
+        String[] strArr = vector.toArray(new String[0]);
+
+        // 8. Capacity Management
+        vector.ensureCapacity(20);
+        vector.trimToSize();
+        vector.setSize(5);
+
+        // 9. Cloning
+        Vector<String> cloned = (Vector<String>) vector.clone();
+        System.out.println("Cloned Vector: " + cloned);
+    }
+}
+
