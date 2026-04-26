@@ -1,0 +1,163 @@
+LinkedList in Java
+`LinkedList` is a class in `java.util` that implements List, Deque, Queue, Collection, and Iterable.
+It is a doubly-linked list data structure, meaning each node has references to both its previous and next nodes.
+Key Characteristics
+- Allows duplicate elements.
+- Maintains insertion order.
+- Provides constant-time insertion and removal at both ends.
+- Slower random access compared to ArrayList (because traversal is required).
+- Supports list operations (like ArrayList) plus queue/deque/stack operations.
+Categorized Methods
+1. Adding Elements
+●	`add(E e)` – Appends element at the end.
+●	`add(int index, E element)` – Inserts at specific index.
+●	`addAll(Collection c)` – Adds all elements from another collection.
+●	`addAll(int index, Collection c)` – Inserts all at given index.
+●	`addFirst(E e)` – Inserts at the beginning.
+●	`addLast(E e)` – Inserts at the end.
+●	`offer(E e)` – Adds to the tail (queue style).
+●	`offerFirst(E e)` – Adds to the head.
+●	`offerLast(E e)` – Adds to the tail.
+●	`push(E e)` – Pushes onto stack (front).
+2. Accessing Elements
+●	`get(int index)` – Returns element at index.
+●	`getFirst()` – Returns first element.
+●	`getLast()` – Returns last element.
+●	`peek()` – Retrieves head without removing.
+●	`peekFirst()` – Retrieves first element without removing.
+●	`peekLast()` – Retrieves last element without removing.
+●	`element()` – Retrieves head (throws exception if empty).
+3. Updating Elements
+●	`set(int index, E element)` – Replaces element at index.
+4. Removing Elements
+●	`remove()` – Removes head.
+●	`remove(int index)` – Removes element at index.
+●	`remove(Object o)` – Removes first occurrence.
+●	`removeFirst()` – Removes first element.
+●	`removeLast()` – Removes last element.
+●	`removeFirstOccurrence(Object o)` – Removes first match.
+●	`removeLastOccurrence(Object o)` – Removes last match.
+●	`removeAll(Collection c)` – Removes all matching elements.
+●	`removeIf(Predicate filter)` – Removes elements satisfying condition.
+●	`clear()` – Removes all elements.
+●	`poll()` – Retrieves and removes head.
+●	`pollFirst()` – Retrieves and removes first.
+●	`pollLast()` – Retrieves and removes last.
+●	`pop()` – Pops from stack (front).
+●	`retainAll(Collection c)` – Keeps only elements present in given collection.
+5. Searching & Checking
+●	`contains(Object o)` – Checks if element exists.
+●	`containsAll(Collection c)` – Checks if all exist.
+●	`indexOf(Object o)` – First index of element.
+●	`lastIndexOf(Object o)` – Last index of element.
+●	`isEmpty()` – Checks if empty.
+●	`size()` – Returns number of elements.
+●	`equals(Object o)` – Compares with another list.
+●	`hashCode()` – Returns hash code.
+6. Iteration Methods
+●	`iterator()` – Returns iterator.
+●	`listIterator()` – Returns list iterator.
+●	`listIterator(int index)` – Returns list iterator starting at index.
+●	`descendingIterator()` – Returns reverse iterator.
+●	`forEach(Consumer action)` – Performs action for each element.
+●	`spliterator()` – Returns spliterator.
+7. Conversion Methods
+●	`toArray()` – Converts to array.
+●	`toArray(T[] a)` – Converts to typed array.
+8. Queue / Stack Processing
+●	`offer(E e)`, `poll()`, `peek()`, `element()`, `push(E e)`, `pop()` – Queue/stack operations.
+9. Sublist / View
+●	`subList(int fromIndex, int toIndex)` – Returns view of portion.
+Java Code Demonstration
+import java.util.*;
+
+public class LinkedListDemo {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+
+        // 1. Adding Elements
+        list.add("A");
+        list.add(1, "B");
+        list.addAll(Arrays.asList("C", "D"));
+        list.addAll(2, Arrays.asList("E", "F"));
+        list.addFirst("Start");
+        list.addLast("End");
+        list.offer("G");
+        list.offerFirst("H");
+        list.offerLast("I");
+        list.push("StackTop");
+
+        // 2. Accessing Elements
+        System.out.println(list.get(2));
+        System.out.println(list.getFirst());
+        System.out.println(list.getLast());
+        System.out.println(list.peek());
+        System.out.println(list.peekFirst());
+        System.out.println(list.peekLast());
+        System.out.println(list.element());
+
+        // 3. Updating Elements
+        list.set(2, "Updated");
+
+        // 4. Removing Elements
+        list.remove();
+        list.remove(1);
+        list.remove("C");
+        list.removeFirst();
+        list.removeLast();
+        list.removeFirstOccurrence("E");
+        list.removeLastOccurrence("F");
+        list.removeAll(Arrays.asList("G", "H"));
+        list.removeIf(s -> s.startsWith("U"));
+        list.poll();
+        list.pollFirst();
+        list.pollLast();
+        list.pop();
+        list.retainAll(Arrays.asList("A", "B", "End"));
+        list.clear();
+
+        // 5. Searching & Checking
+        System.out.println(list.contains("A"));
+        System.out.println(list.containsAll(Arrays.asList("A", "B")));
+        System.out.println(list.indexOf("A"));
+        System.out.println(list.lastIndexOf("B"));
+        System.out.println(list.isEmpty());
+        System.out.println(list.size());
+        System.out.println(list.equals(new LinkedList<>()));
+        System.out.println(list.hashCode());
+
+        // 6. Iteration
+        list.addAll(Arrays.asList("X", "Y", "Z"));
+        Iterator<String> it = list.iterator();
+        while (it.hasNext()) System.out.println(it.next());
+
+        ListIterator<String> lit = list.listIterator();
+        while (lit.hasNext()) System.out.println(lit.next());
+
+        ListIterator<String> lit2 = list.listIterator(1);
+        while (lit2.hasNext()) System.out.println(lit2.next());
+
+        Iterator<String> descIt = list.descendingIterator();
+        while (descIt.hasNext()) System.out.println(descIt.next());
+
+        list.forEach(System.out::println);
+        Spliterator<String> spl = list.spliterator();
+        spl.forEachRemaining(System.out::println);
+
+        // 7. Conversion
+        Object[] arr = list.toArray();
+        String[] strArr = list.toArray(new String[0]);
+
+        // 8. Queue/Stack
+        list.offer("Queue");
+        System.out.println(list.poll());
+        System.out.println(list.peek());
+        System.out.println(list.element());
+        list.push("Stack");
+        System.out.println(list.pop());
+
+        // 9. Sublist
+        List<String> sub = list.subList(0, 1);
+        System.out.println(sub);
+    }
+}
