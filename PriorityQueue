@@ -1,0 +1,85 @@
+PriorityQueue in Java
+`PriorityQueue` is a class in `java.util` that implements **Queue**, **Collection**, and **Iterable**.
+It is a **heap-based priority queue** where elements are ordered according to their **natural ordering** or by a **Comparator** provided at queue construction time.
+Key Characteristics
+●	No null elements allowed.
+●	Unbounded queue but internally backed by an array that grows as needed.
+●	Elements are ordered either by natural order (Comparable) or by a Comparator.
+●	Provides logarithmic time complexity for insertion and removal operations.
+●	Does not guarantee FIFO order; instead, the priority determines the order.
+Categorized Methods
+1. Adding Elements
+●	`add(E e)` – Inserts element into the queue.
+●	`offer(E e)` – Inserts element, returns false if unable.
+2. Accessing Elements
+●	`peek()` – Retrieves head without removing, returns null if empty.
+●	`element()` – Retrieves head without removing, throws exception if empty.
+3. Removing Elements
+●	`poll()` – Retrieves and removes head, returns null if empty.
+●	`remove()` – Retrieves and removes head, throws exception if empty.
+●	`remove(Object o)` – Removes a specific element.
+●	`clear()` – Removes all elements.
+4. Searching & Checking
+●	`contains(Object o)` – Checks if element exists.
+●	`isEmpty()` – Checks if empty.
+●	`size()` – Returns number of elements.
+5. Iteration Methods
+●	`iterator()` – Returns iterator (not guaranteed to traverse in priority order).
+●	`forEach(Consumer action)` – Performs action for each element.
+●	`spliterator()` – Returns spliterator.
+6. Conversion Methods
+●	`toArray()` – Converts to array.
+●	`toArray(T[] a)` – Converts to typed array.
+Java Code Demonstration
+
+import java.util.*;
+
+public class PriorityQueueDemo {
+    public static void main(String[] args) {
+        // Natural ordering (min-heap)
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        // 1. Adding Elements
+        pq.add(10);
+        pq.add(5);
+        pq.add(20);
+        pq.offer(15);
+
+        // 2. Accessing Elements
+        System.out.println("Peek: " + pq.peek());
+        System.out.println("Element: " + pq.element());
+
+        // 3. Removing Elements
+        System.out.println("Poll: " + pq.poll());
+        System.out.println("Remove: " + pq.remove());
+        pq.remove(20);
+        pq.clear();
+
+        // Re-add for demonstration
+        pq.addAll(Arrays.asList(30, 10, 50, 40));
+
+        // 4. Searching & Checking
+        System.out.println("Contains 10: " + pq.contains(10));
+        System.out.println("Is Empty: " + pq.isEmpty());
+        System.out.println("Size: " + pq.size());
+
+        // 5. Iteration
+        Iterator<Integer> it = pq.iterator();
+        while (it.hasNext()) System.out.println("Iterated: " + it.next());
+
+        pq.forEach(System.out::println);
+        Spliterator<Integer> spl = pq.spliterator();
+        spl.forEachRemaining(System.out::println);
+
+        // 6. Conversion
+        Object[] arr = pq.toArray();
+        Integer[] intArr = pq.toArray(new Integer[0]);
+        System.out.println("Array: " + Arrays.toString(intArr));
+
+        // Custom comparator (max-heap)
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        maxHeap.addAll(Arrays.asList(10, 20, 5, 15));
+        System.out.println("Max-Heap Poll: " + maxHeap.poll());
+    }
+}
+
