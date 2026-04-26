@@ -1,0 +1,93 @@
+HashTable in Java
+`Hashtable` is a class in `java.util` that implements Map, Cloneable, and Serializable.
+It is one of the oldest implementations of the Map interface in Java, predating `HashMap`.
+Key Characteristics
+- Stores key-value pairs.
+- No null keys or null values allowed (unlike `HashMap`).
+- Keys are unique.
+- Thread-safe because all methods are synchronized.
+- Generally slower than `HashMap` in single-threaded contexts due to synchronization overhead.
+Categorized Methods
+1. Adding / Updating Elements
+●	`put(K key, V value)` – Associates value with key.
+●	`putAll(Map m)` – Copies all mappings from another map.
+2. Accessing Elements
+●	`get(Object key)` – Returns value for key.
+●	`getOrDefault(Object key, V defaultValue)` – Returns value or default if key not found.
+3. Removing Elements
+●	`remove(Object key)` – Removes mapping for key.
+●	`remove(Object key, Object value)` – Removes entry only if key maps to given value.
+●	`clear()` – Removes all mappings.
+4. Searching & Checking
+●	`containsKey(Object key)` – Checks if key exists.
+●	`contains(Object value)` – Checks if value exists.
+●	`containsValue(Object value)` – Checks if value exists.
+●	`isEmpty()` – Checks if empty.
+●	`size()` – Returns number of mappings.
+●	`equals(Object o)` – Compares with another map.
+●	`hashCode()` – Returns hash code.
+5. Iteration Methods
+●	`keys()` – Returns enumeration of keys.
+●	`elements()` – Returns enumeration of values.
+●	`entrySet()` – Returns set of key-value pairs.
+●	`keySet()` – Returns set of keys.
+●	`values()` – Returns collection of values.
+●	`forEach(BiConsumer action)` – Performs action for each entry.
+6. Legacy Methods
+●	`contains(Object value)` – Legacy synonym for `containsValue()`.
+7. Cloning
+●	`clone()` – Creates shallow copy.
+Java Code Demonstration
+
+import java.util.*;
+
+public class HashTableDemo {
+    public static void main(String[] args) {
+        Hashtable<Integer, String> table = new Hashtable<>();
+
+        // 1. Adding / Updating Elements
+        table.put(1, "A");
+        table.put(2, "B");
+        table.put(3, "C");
+        table.putAll(Map.of(4, "D", 5, "E"));
+
+        // 2. Accessing Elements
+        System.out.println(table.get(2));
+        System.out.println(table.getOrDefault(10, "Not Found"));
+
+        // 3. Removing Elements
+        table.remove(3);
+        table.remove(4, "D");
+
+        // 4. Searching & Checking
+        System.out.println(table.containsKey(1));
+        System.out.println(table.contains("B")); // legacy method
+        System.out.println(table.containsValue("E"));
+        System.out.println(table.isEmpty());
+        System.out.println(table.size());
+        System.out.println(table.equals(Map.of(1, "A", 2, "B", 5, "E")));
+        System.out.println(table.hashCode());
+
+        // 5. Iteration
+        Enumeration<Integer> keys = table.keys();
+        while (keys.hasMoreElements()) {
+            System.out.println("Key: " + keys.nextElement());
+        }
+
+        Enumeration<String> values = table.elements();
+        while (values.hasMoreElements()) {
+            System.out.println("Value: " + values.nextElement());
+        }
+
+        for (Map.Entry<Integer, String> entry : table.entrySet()) {
+            System.out.println("Entry: " + entry.getKey() + " -> " + entry.getValue());
+        }
+
+        table.forEach((k, v) -> System.out.println(k + " = " + v));
+
+        // 6. Cloning
+        Hashtable<Integer, String> cloned = (Hashtable<Integer, String>) table.clone();
+        System.out.println("Cloned Hashtable: " + cloned);
+    }
+}
+
