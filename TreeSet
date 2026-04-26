@@ -1,0 +1,114 @@
+TreeSet in Java
+`TreeSet` is a class in `java.util` that implements NavigableSet, SortedSet, Set, Collection, and Iterable.
+It is a Red-Black Tree based implementation of the Set interface, meaning elements are stored in sorted order.
+Key Characteristics
+●	No duplicates allowed.
+●	Sorted order maintained (natural ordering or via a custom Comparator).
+●	Does not allow null elements (unlike HashSet or LinkedHashSet).
+●	Provides logarithmic time complexity for add, remove, and search operations.
+●	Useful when you need a sorted set with fast access.
+Categorized Methods
+1. Adding Elements
+●	`add(E e)` – Adds element if not already present.
+●	`addAll(Collection c)` – Adds all elements from another collection.
+2. Removing Elements
+●	`remove(Object o)` – Removes specified element if present.
+●	`removeAll(Collection c)` – Removes all elements in given collection.
+●	`clear()` – Removes all elements.
+●	`retainAll(Collection c)` – Retains only elements present in given collection.
+3. Searching & Checking
+●	`contains(Object o)` – Checks if element exists.
+●	`isEmpty()` – Checks if empty.
+●	`size()` – Returns number of elements.
+●	`equals(Object o)` – Compares with another set.
+●	`hashCode()` – Returns hash code.
+4. SortedSet Methods
+●	`first()` – Returns first (lowest) element.
+●	`last()` – Returns last (highest) element.
+●	`headSet(E toElement)` – Returns elements less than toElement.
+●	`tailSet(E fromElement)` – Returns elements greater than or equal to fromElement.
+●	`subSet(E fromElement, E toElement)` – Returns elements between range.
+5. NavigableSet Methods
+●	`ceiling(E e)` – Returns least element ≥ e.
+●	`floor(E e)` – Returns greatest element ≤ e.
+●	`higher(E e)` – Returns least element > e.
+●	`lower(E e)` – Returns greatest element < e.
+●	`pollFirst()` – Retrieves and removes first element.
+●	`pollLast()` – Retrieves and removes last element.
+●	`descendingSet()` – Returns reverse order view.
+6. Iteration Methods
+●	`iterator()` – Returns iterator (ascending order).
+●	`descendingIterator()` – Returns iterator (descending order).
+●	`forEach(Consumer action)` – Performs action for each element.
+●	`spliterator()` – Returns spliterator.
+7. Conversion Methods
+●	`toArray()` – Converts to array.
+●	`toArray(T[] a)` – Converts to typed array.
+Java Code Demonstration
+
+import java.util.*;
+
+public class TreeSetDemo {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        // 1. Adding Elements
+        set.add(10);
+        set.add(5);
+        set.add(20);
+        set.addAll(Arrays.asList(15, 25, 30));
+
+        // 2. Iteration (sorted order)
+        for (Integer i : set) {
+            System.out.println(i);
+        }
+
+        // 3. Removing Elements
+        set.remove(20);
+        set.removeAll(Arrays.asList(25, 30));
+        set.retainAll(Arrays.asList(5, 10, 15));
+        set.addAll(Arrays.asList(40, 50));
+        System.out.println("After modifications: " + set);
+
+        // 4. Searching & Checking
+        System.out.println(set.contains(10));
+        System.out.println(set.isEmpty());
+        System.out.println(set.size());
+        System.out.println(set.equals(new TreeSet<>(Arrays.asList(5, 10, 15, 40, 50))));
+        System.out.println(set.hashCode());
+
+        // 5. SortedSet Methods
+        System.out.println("First: " + set.first());
+        System.out.println("Last: " + set.last());
+        System.out.println("HeadSet(15): " + set.headSet(15));
+        System.out.println("TailSet(15): " + set.tailSet(15));
+        System.out.println("SubSet(10, 40): " + set.subSet(10, 40));
+
+        // 6. NavigableSet Methods
+        System.out.println("Ceiling(12): " + set.ceiling(12));
+        System.out.println("Floor(12): " + set.floor(12));
+        System.out.println("Higher(15): " + set.higher(15));
+        System.out.println("Lower(15): " + set.lower(15));
+        System.out.println("PollFirst: " + set.pollFirst());
+        System.out.println("PollLast: " + set.pollLast());
+        System.out.println("DescendingSet: " + set.descendingSet());
+
+        // 7. Iteration
+        Iterator<Integer> it = set.iterator();
+        while (it.hasNext()) System.out.println(it.next());
+
+        Iterator<Integer> descIt = set.descendingIterator();
+        while (descIt.hasNext()) System.out.println(descIt.next());
+
+        set.forEach(System.out::println);
+        Spliterator<Integer> spl = set.spliterator();
+        spl.forEachRemaining(System.out::println);
+
+        // 8. Conversion
+        Object[] arr = set.toArray();
+        Integer[] intArr = set.toArray(new Integer[0]);
+
+        System.out.println("Array: " + Arrays.toString(intArr));
+    }
+}
+
